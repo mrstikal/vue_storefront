@@ -1,3 +1,5 @@
+const path = require('path');
+
 module.exports = {
   "stories": [
     "../packages/sylius/theme/ui/**/*.stories.mdx",
@@ -7,7 +9,18 @@ module.exports = {
     "@storybook/addon-links",
     "@storybook/addon-essentials",
     "@storybook/addon-interactions",
-    "storybook-addon-sass-postcss",
+    {
+      name: 'storybook-addon-sass-postcss',
+      options: {
+        loadSassAfterPostCSS: true,
+        postcssLoaderOptions: {
+          implementation: require('postcss'),
+        },
+        rule: {
+          test: /\.(scss|sass)$/i,
+        },
+      },
+    },
   ],
-  "framework": "@storybook/vue"
+  "framework": "@storybook/vue",
 }
